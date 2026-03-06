@@ -7,7 +7,7 @@ from google.oauth2.service_account import Credentials
 from datetime import datetime
 import tempfile
 
-OPENAI_API_KEY = "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"   # ← вставь свой ключ
+OPENAI_API_KEY = "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"   # ← вставь свой ключ
 SHEET_NAME     = "call_analyze"
 CREDS_FILE     = "credentials.json"
 

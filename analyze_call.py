@@ -9,7 +9,6 @@ import tempfile
 
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 SHEET_NAME     = st.secrets["SHEET_NAME"]
-CREDS_FILE     = "credentials.json"
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
@@ -18,7 +17,8 @@ def get_sheet():
         "https://www.googleapis.com/auth/spreadsheets",
         "https://www.googleapis.com/auth/drive"
     ]
-    creds = Credentials.from_service_account_file(CREDS_FILE, scopes=scopes)
+    creds_dict = dict(st.secrets["gcp_service_account"])
+    creds = Credentials.from_service_account_info(creds_dict, scopes=scopes)
     gc = gspread.authorize(creds)
     sheet = gc.open(SHEET_NAME).sheet1
     if not sheet.row_values(1):
